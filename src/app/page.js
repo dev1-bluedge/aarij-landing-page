@@ -473,7 +473,7 @@ function Page() {
                   ))}
                 </motion.div>
                 <motion.div
-                  className="flex flex-col gap-6 items-center justify-center w-full  "
+                  className="md:flex flex-col gap-6 items-center justify-center w-full hidden "
                   animate={{
                     y: reverse ? "3%" : 0,
                   }}
