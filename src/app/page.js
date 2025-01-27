@@ -1,15 +1,13 @@
 "use client";
 import React, { useEffect, useState, useRef, Fragment } from "react";
 import { FaBarsStaggered, FaCirclePlus } from "react-icons/fa6";
-import { motion } from "framer-motion";
-import { TbJewishStarFilled } from "react-icons/tb";
 import { BsPlus, BsStars } from "react-icons/bs";
 import Image from "next/image";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { ImCross } from "react-icons/im";
 import TextSection from "./components/TextSection";
-import { useAnimate } from "framer-motion";
+import { AnimatePresence, motion, useAnimate } from "framer-motion";
 
 function Page() {
   const animation = useRef(null);
@@ -22,10 +20,10 @@ function Page() {
     box5: false,
     reverse: true,
     isHover: false,
+    isOpen: false,
   });
 
-  const { box1, box2, box3, box4, box5, reverse, isHover } = box;
-  console.log("TCL: Page -> box1", box1);
+  const { box1, box2, box3, box4, box5, reverse, isHover, isOpen } = box;
 
   useEffect(() => {
     AOS.init({
@@ -138,8 +136,8 @@ function Page() {
 
   return (
     <div>
-      <div className="bg-black">
-        <div className="w-full mt-4 flex justify-center">
+      <div className="border border-white/15 mx-4 md:rounded-full bg-neutral-950/70 backdrop-blur sticky top-4 rounded-3xl z-20">
+        <div className="w-full p-4 flex justify-center ">
           <div className="w-[80%] xl:w-[60%] flex justify-between items-center h-[7vh] rounded-3xl">
             <Image src="/images/logo.svg" height={130} width={130} alt="logo" />
             <div className="lg:flex gap-4 text-gray-300 hidden lg:ml-24  xl:ml-10">
@@ -156,12 +154,50 @@ function Page() {
                 Sign up
               </button>
             </div>
-
-            <div className="md:hidden flex">
-              <FaBarsStaggered size={26} color="gray" />
+            <div className="lg:hidden">
+              {isOpen ? (
+                <ImCross
+                  size={26}
+                  color="white"
+                  onClick={() => setBox({ ...box, isOpen: !isOpen })}
+                />
+              ) : (
+                <FaBarsStaggered
+                  size={26}
+                  color="white"
+                  onClick={() => setBox({ ...box, isOpen: !isOpen })}
+                />
+              )}
             </div>
           </div>
         </div>
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ height: 0 }}
+              animate={{ height: "auto" }}
+              exit={{ height: 0 }}
+              className="  overflow-hidden lg:hidden"
+            >
+              <div className="flex flex-col items-center justify-center  gap-4 py-4">
+                <div className="flex flex-col text-center gap-4 text-gray-300 lg:hidden">
+                  <p>Home</p>
+                  <p>Features</p>
+                  <p>Integration</p>
+                  <p>Faqs</p>
+                </div>
+                <div className="gap-2 flex flex-col">
+                  <button className="p-4 py-2 px-5 rounded-3xl border-2 border-gray-200 text-gray-300 font-semibold">
+                    Log in
+                  </button>
+                  <button className="py-2 px-4 rounded-3xl text-black bg-lime-400 font-semibold">
+                    Sign up
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <div className="w-full flex justify-center mt-28 overflow-hidden">
@@ -215,8 +251,8 @@ function Page() {
         </div>
       </div>
       <div className="w-full flex justify-center">
-        <div className="w-[60%] flex flex-col justify-center items-center mt-20 h-[25vh]  gap-8 mb-10 overflow-x-clip">
-          <p className="text-white/50">
+        <div className="w-[80%] md:w-[60%] flex flex-col justify-center items-center mt-20 h-[25vh]  gap-8 mb-10 overflow-x-clip">
+          <p className="text-white/50 text-sm">
             Already chosen by these market leaders
           </p>
           <div className="flex overflow-hidden w-full">
@@ -233,7 +269,7 @@ function Page() {
             >
               {logoImages.map((item, index) => (
                 <div key={index}>
-                  <div className="md:h-[3rem] md:w-[13rem] lg:w-[20rem] ">
+                  <div className="h-[7rem] w-[7rem]  md:h-[3rem] md:w-[13rem] lg:w-[20rem] ">
                     <Image src={item} height={220} width={220} alt="logo" />
                   </div>
                 </div>
@@ -243,17 +279,12 @@ function Page() {
         </div>
       </div>
 
-      <TextSection />
-      <div className="sticky top-28 lg:top-40 flex justify-center flex-col items-center">
-        {/* <div className="  w-fit px-2 border-[1px] bg-black border-lime-400 rounded-3xl h-[2rem] flex justify-center items-center gap-2">
-          <BsPlus size={28} className="text-lime-400" />
-          <p className="font-semibold text-sm text-lime-400">
-            INTRODUCTION LAYERS
-          </p>
-        </div> */}
+      <div className="w-full flex justify-center">
+        <TextSection />
       </div>
+      <div className="sticky top-28 lg:top-40 flex justify-center flex-col items-center"></div>
       <div className="w-full flex flex-col justify-center items-center  ">
-        <div className="w-full flex flex-col justify-center items-center gap-6 mt-[12rem] pb-20"></div>
+        <div className="w-full flex flex-col justify-center items-center gap-6"></div>
         <div className="w-full flex flex-col justify-center items-center gap-6 mt-[12rem] pb-20">
           <div className="w-fit px-1 bg-black border-[1px] border-lime-400 rounded-3xl h-[2rem] flex justify-center items-center gap-2">
             <BsPlus size={28} className="text-lime-400" />
