@@ -8,22 +8,18 @@ import "aos/dist/aos.css";
 import { ImCross } from "react-icons/im";
 import TextSection from "./components/TextSection";
 import { AnimatePresence, motion, useAnimate } from "framer-motion";
+import Accordin from "./components/accordin";
 
 function Page() {
   const animation = useRef(null);
   const [scope, animate] = useAnimate();
   const [box, setBox] = useState({
-    box1: false,
-    box2: false,
-    box3: false,
-    box4: false,
-    box5: false,
     reverse: true,
     isHover: false,
     isOpen: false,
   });
 
-  const { box1, box2, box3, box4, box5, reverse, isHover, isOpen } = box;
+  const { reverse, isHover, isOpen } = box;
 
   useEffect(() => {
     AOS.init({
@@ -537,132 +533,11 @@ function Page() {
             </div>
 
             <div className="w-full  lg:w-[90%] flex flex-col items-center gap-4 mt-5">
-              <div
-                className="md:w-[29rem] bg-neutral-900 rounded-2xl flex-col gap-4 p-6 flex "
-                onClick={() => setBox({ ...box, box1: true })}
-              >
-                <motion.div
-                  className="flex justify-between items-center gap-2"
-                  transition={{
-                    duration: 5,
-                    ease: "linear",
-                  }}
-                >
-                  <p className="text-white text-md font-semibold">
-                    How is Layers different from other design tools?
-                  </p>
-                  {box1 ? (
-                    <ImCross size={25} className="text-lime-400" />
-                  ) : (
-                    <FaCirclePlus size={25} className="text-lime-400" />
-                  )}
-                </motion.div>
-                {box1 && (
-                  <div className="w-full ">
-                    <p className="text-white/50 text-sm font-semibold">
-                      How is Layers different from other design tools? How is
-                      Layers different from other design tools? How is Layers
-                      different from other design tools?
-                    </p>
-                  </div>
-                )}
-              </div>
-              <div
-                className="md:w-[29rem] bg-neutral-900 rounded-2xl flex-col gap-4 p-6 flex "
-                onClick={() => setBox({ ...box, box2: !box2 })}
-              >
-                <div className="flex justify-between items-center gap-2">
-                  <p className="text-white text-md font-semibold">
-                    How is Layers different from other design tools?
-                  </p>
-                  {box2 ? (
-                    <ImCross size={25} className="text-lime-400" />
-                  ) : (
-                    <FaCirclePlus size={25} className="text-lime-400" />
-                  )}
-                </div>
-                {box2 && (
-                  <div className="w-full ">
-                    <p className="text-white/50 text-sm font-semibold">
-                      How is Layers different from other design tools? How is
-                      Layers different from other design tools? How is Layers
-                      different from other design tools?
-                    </p>
-                  </div>
-                )}
-              </div>
-              <div
-                className="md:w-[29rem] bg-neutral-900 rounded-2xl flex-col gap-4 p-6 flex "
-                onClick={() => setBox({ ...box, box3: !box3 })}
-              >
-                <div className="flex justify-between items-center gap-2">
-                  <p className="text-white text-md font-semibold">
-                    How is Layers different from other design tools?
-                  </p>
-                  {box3 ? (
-                    <ImCross size={25} className="text-lime-400" />
-                  ) : (
-                    <FaCirclePlus size={25} className="text-lime-400" />
-                  )}
-                </div>
-                {box3 && (
-                  <div className="w-full ">
-                    <p className="text-white/50 text-sm font-semibold">
-                      How is Layers different from other design tools? How is
-                      Layers different from other design tools? How is Layers
-                      different from other design tools?
-                    </p>
-                  </div>
-                )}
-              </div>
-              <div
-                className="md:w-[29rem] bg-neutral-900 rounded-2xl flex-col gap-4 p-6 flex "
-                onClick={() => setBox({ ...box, box4: !box4 })}
-              >
-                <div className="flex justify-between items-center gap-2">
-                  <p className="text-white text-md font-semibold">
-                    How is Layers different from other design tools?
-                  </p>
-                  {box4 ? (
-                    <ImCross size={25} className="text-lime-400" />
-                  ) : (
-                    <FaCirclePlus size={25} className="text-lime-400" />
-                  )}
-                </div>
-                {box4 && (
-                  <div className="w-full ">
-                    <p className="text-white/50 text-sm font-semibold">
-                      How is Layers different from other design tools? How is
-                      Layers different from other design tools? How is Layers
-                      different from other design tools?
-                    </p>
-                  </div>
-                )}
-              </div>
-              <div
-                className="md:w-[29rem] bg-neutral-900 rounded-2xl flex-col gap-4 p-6 flex "
-                onClick={() => setBox({ ...box, box5: !box5 })}
-              >
-                <div className="flex justify-between items-center gap-2">
-                  <p className="text-white text-md font-semibold">
-                    How is Layers different from other design tools?
-                  </p>
-                  {box5 ? (
-                    <ImCross size={25} className="text-lime-400" />
-                  ) : (
-                    <FaCirclePlus size={25} className="text-lime-400" />
-                  )}
-                </div>
-                {box5 && (
-                  <div className="w-full ">
-                    <p className="text-white/50 text-sm font-semibold">
-                      How is Layers different from other design tools? How is
-                      Layers different from other design tools? How is Layers
-                      different from other design tools?
-                    </p>
-                  </div>
-                )}
-              </div>
+              <Accordin state="box1" />
+              <Accordin state="box2" />
+              <Accordin state="box3" />
+              <Accordin state="box4" />
+              <Accordin state="box5" />
             </div>
           </div>
         </div>
