@@ -22,7 +22,7 @@ function TextSection() {
   }, [wordIndex]);
 
   return (
-    <section className="py-28 lg:py-40">
+    <section>
       <div className="container ">
         <div className="sticky top-20 md:top-30">
           <div className="flex w-full justify-center mb-3">
