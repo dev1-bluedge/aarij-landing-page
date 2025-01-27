@@ -1,5 +1,6 @@
 import { useScroll, useTransform, motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
+import { BsPlus } from "react-icons/bs";
 function TextSection() {
   const text =
     " Your creative process deserves better. You're racing to create exceptional work, but traditional design tool slow you down with unnecessary complexity and steep learning curves.";
@@ -23,11 +24,16 @@ function TextSection() {
   return (
     <section className="py-28 lg:py-40">
       <div className="container ">
-        <div className="sticky top-20 md:top-28">
-          <div className="flex justify-center">
-            <p>Introducing Layers</p>
+        <div className="sticky top-20 md:top-30">
+          <div className="flex w-full justify-center mb-3">
+            <div className="w-fit px-1 bg-black border-[1px] border-lime-400 rounded-3xl h-[2rem] flex justify-center items-center gap-2">
+              <BsPlus size={28} className="text-lime-400" />
+              <p className="font-semibold text-sm text-lime-400 uppercase">
+                Introducing
+              </p>
+            </div>
           </div>
-          <div className="text-4xl md:text-6xl lg:text-7xl">
+          <div className="text-3xl w-[20rem] md:text-5xl md:w-[40rem] lg:text-5xl lg:w-[40rem] xl:w-[60rem] text-center">
             <span>Your creative process deserves better.</span>
             <span className="text-white/15">
               {words.map((word, index) => (
